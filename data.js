@@ -9,8 +9,9 @@ let sectionOneContent = document.querySelector("#one");
 /* 
     Data is simply the lists of newest songs uploaded to server.
     6 songs to be precise
+    New array will be created and 6 new songs will be pushed to the array
 */
-const data = [
+let data = [
     {
         author: "Davido",
         title: "Temptation",
@@ -20,25 +21,25 @@ const data = [
     {
         author: "Davidoo",
         title: "Temptation",
-        img: "Images/1641602311795.jpg",
+        img: "Images/1641602361529.jpg",
         timePosted: "12:40"
     },
     {
         author: "Davido",
         title: "Temptation",
-        img: "Images/1641602311795.jpg",
+        img: "Images/1641602395716.jpg",
         timePosted: "12:40"
     },
     {
         author: "Davido",
         title: "Temptation",
-        img: "Images/1641602311795.jpg",
+        img: "Images/1641602432202.jpg",
         timePosted: "12:40"
     },
     {
         author: "Davido",
         title: "Temptation",
-        img: "Images/1641602311795.jpg",
+        img: "Images/1643210649558.jpg",
         timePosted: "12:40"
     },
     {
@@ -52,38 +53,33 @@ const data = [
 data.map(datum =>{
   let hello =
     `
-    <a href="" class="card">
+    <a href="" class="card" style="background: url(${datum.img})">
         <div class="glasseffect">
-            <h3>${datum.title}</h3>
+            <h3 class="card-title">${datum.title}</h3>
             <div class="info">
                 <div class="artist-info">
                     <img src=${datum.img} alt="">
                     <p>${datum.author}</p>
                 </div>
                 <div class="time-info">
-                    <img src=${datum.img} alt="" width="100">
+                    <img src='Images/icons/clock.svg' alt="" width="15">
                     <p>${datum.timePosted}</p>
                 </div>
             </div>
         </div>
     </a>
     `
-    let ahref = document.querySelectorAll("#one a");
-    ahref.forEach(x =>{
-        x.style.background = `url("Images/1641602311795.jpg")`
-        x.style.backgroundSize = 100+"%";
-        x.style.backgroundPosition = `center/center`
-
-        console.log(x)
-    })
-    // console.log(hello)
     sectionOneContent.innerHTML += hello;
-
 });
 
+let ahref = document.querySelectorAll("#one a");
+ahref.forEach((element)=>{
+    element.style.backgroundSize = 100+"%";
+    element.style.backgroundPosition = `center/center`;
+})
 
 
-
+    
 /* 
     PopularSong songs can be edited by the owner of this blog.
 */
@@ -155,7 +151,7 @@ popularSong.map(datum =>{
     let hello =
     `
         <a class="popular-main-a" href="">
-            <img class="banner" src="Images/1641602395716.jpg" alt="banner" width="70px">
+            <img class="banner" src=${datum.img} alt="banner" width="70px">
             <div class="popular-song-info">
                 <p class="song-type">
                     <!--This is to know if it is single or album-->
@@ -165,7 +161,7 @@ popularSong.map(datum =>{
                     ${datum.title}
                 </p>
                 <div class="time">
-                    <img src="Images/NaijaRugged - Copy.png" width="100px" alt="">
+                    <img src='Images/icons/clock.svg' alt="" width="15">
                     <span>${datum.timePosted}</span>
                 </div>
             </div>
@@ -174,6 +170,35 @@ popularSong.map(datum =>{
     popularSongHTML.innerHTML += hello;
 })
 
+let count = 0;
+let scale = 0;
+function scrolllLeft(){
+    ahref[0].style.transform = "scale(1.1)";
+    count++
+    if(count === 11) count = 1;
+    if(count % 5 === 0){
+        scale++
+        if(scale === ahref.length) scale = 0;
+        ahref.forEach(item => {
+            item.style.transform = "scale(1)";
+        })
+        ahref[scale].style.transform = "scale(1.1)"
+        /* Try and add transition to make the scale property work so well*/
+        sectionOneContent.scrollLeft+= 279;
+    }
+    let maxwidth = sectionOneContent.scrollWidth - sectionOneContent.clientWidth
+    if(sectionOneContent.scrollLeft === maxwidth) sectionOneContent.scrollLeft = 0;
+    setTimeout(scrolllLeft, 1000)
+
+
+   //This will be used to my satisfaction 
+// .card:hover{
+//     transform: scale(1.1);
+// }
+}
+
+
+scrolllLeft()
 
 {/* <a class="popular-main-a" href="">
     <img class="banner" src="Images/1641602395716.jpg" alt="banner" width="70px">
