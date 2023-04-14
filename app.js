@@ -26,6 +26,7 @@ dayHTML.innerText = `${day} ${jsDay} ${month}`
 
 let dayAndNight = document.querySelector("header #brightness");
 let dayCount = 0;
+
 dayAndNight.onclick = ()=>{
     dayCount++;
     if(dayCount ===3) dayCount=1

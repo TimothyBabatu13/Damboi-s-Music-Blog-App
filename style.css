@@ -15,10 +15,10 @@ a{
 header img#logo{
     width: 200px;
 }
-header #brightness{
+header #brightness, .circle{
     cursor: pointer;
 }
-header .top, .card, #one, .info, .artist-info, .time-info, #popular .top, .popular-main-a, .time, footer, footer div{
+header .top, .card, #one, .info, .artist-info, .time-info, #popular .top, .popular-main-a, .time, footer, footer div, #circle{
     display: flex;
 }
 header .top, .info, footer, footer div{
@@ -87,7 +87,7 @@ header .top, .info, .artist-info, .time-info, #popular .top, .popular-main-a, .t
     padding-right: 10px;
     margin-bottom: 15px;
 }
-.banner, .time img, .info img, footer div img{
+.banner, .time img, .info img, footer div img, .circle{
     margin-right: 10px;
 }
 footer{
@@ -108,4 +108,16 @@ footer *{
 }
 footer img{
     filter: inver(0) !important;
+}
+#circle{
+    margin-top: 10px;
+}
+.circle{
+    height: 20px;
+    width: 20px;
+    background: red;
+    border-radius: 50%;
+}
+.active{
+    background: green;
 }

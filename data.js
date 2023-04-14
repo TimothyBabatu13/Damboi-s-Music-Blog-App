@@ -101,48 +101,28 @@ let popularSong = [
         title: "Temptation",
         img: "Images/1641602311795.jpg",
         timePosted: "12:40",
-        album: false,
-        /*
-            create a key "album" that returns a function that checks if album
-            is true or false. If it's true, text should be album, otherwise, 
-            it should be single
-        */ 
+        album: false
     },
     {
         author: "Davido",
         title: "Temptation",
         img: "Images/1641602311795.jpg",
         timePosted: "12:40",
-        album: false,
-        /*
-            create a key "album" that returns a function that checks if album
-            is true or false. If it's true, text should be album, otherwise, 
-            it should be single
-        */ 
+        album: false
     },
     {
         author: "Davido",
         title: "Temptation",
         img: "Images/1641602311795.jpg",
         timePosted: "12:40",
-        album: false,
-        /*
-            create a key "album" that returns a function that checks if album
-            is true or false. If it's true, text should be album, otherwise, 
-            it should be single
-        */ 
+        album: false
     },
     {
         author: "Davido",
         title: "Temptation",
         img: "Images/1641602311795.jpg",
         timePosted: "12:40",
-        album: false,
-        /*
-            create a key "album" that returns a function that checks if album
-            is true or false. If it's true, text should be album, otherwise, 
-            it should be single
-        */ 
+        album: false
     }
 ]
 
@@ -170,8 +150,60 @@ popularSong.map(datum =>{
     popularSongHTML.innerHTML += hello;
 })
 
+let slideShowCount = -1;
 let count = 0;
 let scale = 0;
+let oneDiv = document.querySelector("#one");
+let circleContainer = document.querySelector("#circle");
+let circle = document.querySelectorAll(".circle")
+if (window.innerWidth <= 500) {
+    slideShow()
+    oneDiv.style.flexDirection = "column-reverse";
+    oneDiv.style.alignItems = "center";
+    circleContainer.style.display = "flex";
+} 
+else{
+    scrolllLeft();
+    circleContainer.style.display = "none";
+
+} 
+
+
+
+
+function slideShow(){
+    let ahref = document.querySelectorAll("#one a");
+    slideShowCount++;
+    if(slideShowCount === ahref.length){
+        slideShowCount = 0;
+    }
+    
+    for(let i = 0; i < ahref.length; i++){
+        ahref[i].style.display = "none";
+        ahref[i].style.marginRight = 0;  
+        circle[i].classList.remove("active");
+
+        circle[i].onclick = ()=>{
+            for(let i = 0; i < ahref.length; i++){
+                circle[i].classList.remove("active")
+            }
+            circle[i].classList.add("active");
+            clearTimeout(time);
+            slideShowCount = i-1;
+            return slideShow();
+        }
+    }
+
+  
+    ahref[slideShowCount].style.display = "flex";
+    ahref[slideShowCount].style.width = 100+"%";
+    circle[slideShowCount].classList.add("active")
+
+    const time = setTimeout(slideShow, 5000)
+}
+
+
+
 function scrolllLeft(){
     ahref[0].style.transform = "scale(1.1)";
     count++
@@ -197,22 +229,3 @@ function scrolllLeft(){
 // }
 }
 
-
-scrolllLeft()
-
-{/* <a class="popular-main-a" href="">
-    <img class="banner" src="Images/1641602395716.jpg" alt="banner" width="70px">
-    <div class="popular-song-info">
-        <p class="song-type">
-            <!--This is to know if it is single or album-->
-            NEW ALBUM
-        </p>
-        <p class="song-title">
-            Armin van Buuren - High On Your Love
-        </p>
-        <div class="time">
-            <img src="Images/NaijaRugged - Copy.png" width="100px" alt="">
-            <span>10 min ago</span>
-        </div>
-    </div>
-</a> */}
